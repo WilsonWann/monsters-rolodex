@@ -2,6 +2,9 @@ import { Component } from 'react'
 import logo from './logo.svg';
 import './App.css';
 
+import CardList from './components/card-list/card-list.component'
+import SearchBox from './components/search-box/search-box.component';
+
 class App extends Component {
   constructor() {
     super()
@@ -34,17 +37,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
+        <SearchBox
+          className="monsters-search-box"
           placeholder='search monsters'
-          onChange={onSearchChange}
+          onChangeHandler={onSearchChange}
         />
-        {
-          filteredMonsters.map((monster) =>
-            <MonsterCard key={monster.id} monster={monster} />)
-        }
-
+        <CardList monsters={filteredMonsters} />
       </div>
     );
 
@@ -52,22 +50,3 @@ class App extends Component {
 }
 
 export default App;
-class MonsterCard extends Component {
-
-  constructor(props) {
-    super(props)
-    // console.log("🚀 ~ MonsterCard ~ constructor ~ props:", props)
-    this.state = {
-      monster: props.monster,
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>{this.state.monster.name}</h1>
-      </div>
-    );
-  }
-}
-
